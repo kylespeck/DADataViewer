@@ -74,54 +74,59 @@ namespace DADataViewer
 
         private void UpdateEffectImage()
         {
-            if (_selectedFileName.EndsWith(".efa", StringComparison.CurrentCultureIgnoreCase))
-            {
-                _effectImage = new Bitmap(300, 100);
-                using (var g = Graphics.FromImage(_effectImage))
-                {
-                    g.DrawString("EFA is not currently implemented.", new Font("GulimChe", 9, FontStyle.Regular), Brushes.White, 10, 10);
-                }
-                effectPanel.Refresh();
-                return;
-            }
-
             animationTimer.Stop();
             Settings.Default.VerifyRohLocation();
             animationTimer.Start();
 
             using (var archive = DataArchive.Open(Settings.Default.RohLocation))
             {
-                var epf = new EPFFile(archive.GetEntry(_selectedFileName));
-
-                if (_animationFrame >= epf.Frames.Count)
+                if (_selectedFileName.EndsWith(".epf", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    _animationFrame = 0;
-                }
+                    var epf = new EPFFile(archive.GetEntry(_selectedFileName));
 
-                var frame = epf.Frames[_animationFrame];
-
-                int paletteNumber = _paletteTable.GetPaletteNumber(_selectedFileNumber);
-
-                bool useBlending = false;
-
-                if (paletteNumber >= 1000)
-                {
-                    paletteNumber -= 1000;
-                    useBlending = true;
-                }
-
-                var palette = new Palette(archive.GetEntry($"eff{paletteNumber:d3}.pal"));
-
-                _effectImage = new Bitmap(epf.Width, epf.Height);
-
-                using (var g = Graphics.FromImage(_effectImage))
-                {
-                    if (useBlending)
+                    if (_animationFrame >= epf.Frames.Count)
                     {
-                        // temporary solution
-                        g.Clear(Color.Black);
+                        _animationFrame = 0;
                     }
-                    g.DrawImage(frame.Render(palette), frame.Left, frame.Top);
+
+                    var frame = epf.Frames[_animationFrame];
+
+                    int paletteNumber = _paletteTable.GetPaletteNumber(_selectedFileNumber);
+
+                    bool useBlending = false;
+
+                    if (paletteNumber >= 1000)
+                    {
+                        paletteNumber -= 1000;
+                        useBlending = true;
+                    }
+
+                    var palette = new Palette(archive.GetEntry($"eff{paletteNumber:d3}.pal"));
+
+                    _effectImage = new Bitmap(epf.Width, epf.Height);
+
+                    using (var g = Graphics.FromImage(_effectImage))
+                    {
+                        if (useBlending)
+                        {
+                            // temporary solution
+                            g.Clear(Color.Black);
+                        }
+                        g.DrawImage(frame.Render(palette), frame.Left, frame.Top);
+                    }
+                }
+                else
+                {
+                    var efa = new EFAFile(archive.GetEntry(_selectedFileName));
+
+                    if (_animationFrame >= efa.Frames.Count)
+                    {
+                        _animationFrame = 0;
+                    }
+
+                    var frame = efa.Frames[_animationFrame];
+
+                    _effectImage = frame.Render();
                 }
             }
 
