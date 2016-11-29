@@ -95,7 +95,7 @@ namespace DADataViewer
                     frontStopFrameIndex = 0;
                 }
 
-                if (_animationFrame >= mpf.StopFrameCount)
+                if (_animationFrame >= mpf.StopFrameCount || (frontStopFrameIndex + _animationFrame) >= mpf.Frames.Count)
                 {
                     _animationFrame = 0;
                 }
