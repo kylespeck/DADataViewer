@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.motionTilesPanel = new System.Windows.Forms.Panel();
+            this.motionTilesPanel = new System.Windows.Forms.DoubleBufferedPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.motionTilesListBox = new System.Windows.Forms.ToolStripComboBox();
             this.genderListBox = new System.Windows.Forms.ToolStripComboBox();
@@ -125,7 +125,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel motionTilesPanel;
+        private System.Windows.Forms.DoubleBufferedPanel motionTilesPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox motionTilesListBox;
         private System.Windows.Forms.StatusStrip statusStrip1;

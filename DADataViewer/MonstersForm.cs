@@ -16,6 +16,8 @@ namespace DADataViewer
         private string _selectedFileName;
         private int _selectedFileNumber;
 
+        private int _animationFrame;
+
         public MonstersForm()
         {
             InitializeComponent();
@@ -41,10 +43,16 @@ namespace DADataViewer
             }
         }
 
+        private void MonstersForm_VisibleChanged(object sender, EventArgs e)
+        {
+            animationTimer.Enabled = Visible;
+        }
+
         private void monsterFilesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedFileName = (string)monsterFilesListBox.SelectedItem;
             _selectedFileNumber = int.Parse(_selectedFileName.Substring(3, 3));
+            _animationFrame = 0;
             UpdateMonsterTileImage();
             monsterTileLabel.Text = "Tile: " + _selectedFileNumber;
         }
@@ -56,6 +64,8 @@ namespace DADataViewer
 
         private void animationTimer_Tick(object sender, EventArgs e)
         {
+            _animationFrame++;
+            UpdateMonsterTileImage();
         }
 
         private void UpdateMonsterTileImage()
@@ -85,13 +95,18 @@ namespace DADataViewer
                     frontStopFrameIndex = 0;
                 }
 
-                var frame = mpf.Frames[frontStopFrameIndex];
+                if (_animationFrame >= mpf.StopFrameCount)
+                {
+                    _animationFrame = 0;
+                }
 
-                _monsterTileImage = new Bitmap(frame.Width, frame.Height);
+                var frame = mpf.Frames[frontStopFrameIndex + _animationFrame];
+
+                _monsterTileImage = new Bitmap(mpf.Width, mpf.Height);
 
                 using (var g = Graphics.FromImage(_monsterTileImage))
                 {
-                    g.DrawImage(frame.Render(pal), 0, 0);
+                    g.DrawImage(frame.Render(pal), frame.Left, frame.Top);
                 }
             }
 

@@ -53,6 +53,9 @@
     <Compile Include="BinaryReaderExtensions.cs" />
     <Compile Include="Data\DataArchive.cs" />
     <Compile Include="Data\DataArchiveEntry.cs" />
+    <Compile Include="DoubleBufferedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Drawing\EPF.cs" />
     <Compile Include="Drawing\HPF.cs" />
     <Compile Include="Drawing\MPF.cs" />

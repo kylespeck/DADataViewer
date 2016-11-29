@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.itemTilesPanel = new System.Windows.Forms.Panel();
+            this.itemTilesPanel = new System.Windows.Forms.DoubleBufferedPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.itemFilesListBox = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -109,7 +109,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel itemTilesPanel;
+        private System.Windows.Forms.DoubleBufferedPanel itemTilesPanel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel itemTileLabel;

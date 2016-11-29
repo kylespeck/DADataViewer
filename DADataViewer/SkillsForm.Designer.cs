@@ -30,7 +30,7 @@
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.skillTileLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.skillTilesPanel = new System.Windows.Forms.Panel();
+            this.skillTilesPanel = new System.Windows.Forms.DoubleBufferedPanel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +85,7 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel skillTilesPanel;
+        private System.Windows.Forms.DoubleBufferedPanel skillTilesPanel;
         private System.Windows.Forms.ToolStripStatusLabel skillTileLabel;
     }
 }

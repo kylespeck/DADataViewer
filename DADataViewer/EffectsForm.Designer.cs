@@ -33,7 +33,7 @@
             this.effectFilesListBox = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.effectNumberLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.effectPanel = new System.Windows.Forms.Panel();
+            this.effectPanel = new System.Windows.Forms.DoubleBufferedPanel();
             this.animationTimer = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -116,7 +116,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox effectFilesListBox;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel effectPanel;
+        private System.Windows.Forms.DoubleBufferedPanel effectPanel;
         private System.Windows.Forms.ToolStripStatusLabel effectNumberLabel;
         private System.Windows.Forms.Timer animationTimer;
     }
